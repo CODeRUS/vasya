@@ -3,7 +3,12 @@ TARGET = vasya
 QT += bluetooth
 CONFIG += sailfishapp
 
-SOURCES += src/vasya.cpp
+SOURCES += \
+    src/vasya.cpp \
+    src/elmcommunicator.cpp
+
+HEADERS += \
+    src/elmcommunicator.h
 
 DISTFILES += \
     qml/vasya.qml \

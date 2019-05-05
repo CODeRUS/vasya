@@ -1,30 +1,37 @@
 import QtQuick 2.0
 import Sailfish.Silica 1.0
+import org.coderus.vasya 1.0
 
 Page {
     id: page
 
-    // The effective value will be restricted by ApplicationWindow.allowedOrientations
+    property alias address: elm.address
+    property alias name: pageHeader.title
+
     allowedOrientations: Orientation.All
 
-    SilicaListView {
-        id: listView
-        model: 20
-        anchors.fill: parent
-        header: PageHeader {
-            title: qsTr("Nested Page")
-        }
-        delegate: BackgroundItem {
-            id: delegate
+    Component.onCompleted: {
+        console.log(address)
+    }
 
-            Label {
-                x: Theme.horizontalPageMargin
-                text: qsTr("Item") + " " + index
-                anchors.verticalCenter: parent.verticalCenter
-                color: delegate.highlighted ? Theme.highlightColor : Theme.primaryColor
+    ElmCommunicator {
+        id: elm
+    }
+
+    SilicaFlickable {
+        anchors.fill: parent
+
+        contentHeight: column.height
+
+        Column {
+            id: column
+
+            width: page.width
+            spacing: Theme.paddingLarge
+
+            PageHeader {
+                id: pageHeader
             }
-            onClicked: console.log("Clicked " + index)
         }
-        VerticalScrollDecorator {}
     }
 }
